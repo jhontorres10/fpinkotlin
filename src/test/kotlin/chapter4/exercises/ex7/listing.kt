@@ -1,27 +1,36 @@
 package chapter4.exercises.ex7
 
+import chapter3.Cons
 import chapter3.List
+import chapter3.foldRight
 import chapter4.Either
 import chapter4.Left
 import chapter4.Right
+import chapter4.map
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
-import utils.SOLUTION_HERE
 
 //TODO: Enable tests by removing `!` prefix
 class Exercise7 : WordSpec({
 
     //tag::init[]
+    fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> =
+        foldRight(es, Right(List.empty())) { item: Either<E, A>, itemEither: Either<E, List<A>> ->
+            when (itemEither) {
+                is Left -> itemEither
+                is Right -> when (item) {
+                    is Left -> item
+                    is Right -> Right(Cons(item.value, itemEither.value))
+                }
+            }
+        }
+
     fun <E, A, B> traverse(
         xs: List<A>,
         f: (A) -> Either<E, B>
-    ): Either<E, List<B>> =
+    ): Either<E, List<B>> = sequence(xs.map(f))
 
-        SOLUTION_HERE()
 
-    fun <E, A> sequence(es: List<Either<E, A>>): Either<E, List<A>> =
-
-        SOLUTION_HERE()
     //end::init[]
 
     fun <A> catches(a: () -> A): Either<String, A> =

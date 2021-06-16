@@ -3,16 +3,13 @@ package chapter4.exercises.ex5
 import chapter3.Cons
 import chapter3.List
 import chapter3.Nil
-import chapter3.foldLeft
 import chapter3.foldRight
 import chapter4.None
 import chapter4.Option
 import chapter4.Some
 import chapter4.map
-import chapter4.sec3.catches
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
-import utils.SOLUTION_HERE
 
 //TODO: Enable tests by removing `!` prefix
 class Exercise5 : WordSpec({

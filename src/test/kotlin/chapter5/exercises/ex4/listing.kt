@@ -3,12 +3,10 @@ package chapter5.exercises.ex4
 import chapter5.Stream
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.WordSpec
-import utils.SOLUTION_HERE
 
 //tag::init[]
 fun <A> Stream<A>.forAll(p: (A) -> Boolean): Boolean =
-
-    SOLUTION_HERE()
+    this.foldRight({ true }, { item, acuum -> acuum() && p(item) })
 //end::init[]
 
 //TODO: Enable tests by removing `!` prefix
